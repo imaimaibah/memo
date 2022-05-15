@@ -1,0 +1,8 @@
+Using socat and a .ssh/config like this:
+
+Host=foo.server.com
+ProxyCommand=socat - PROXY:your.proxy.ip:%h:%p,proxyport=3128,proxyauth=user:pwd
+You should be able to ssh to foo.server.com and
+
+git clone ssh://foo.server.com/var/git/myrepo.git
+

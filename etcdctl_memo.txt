@@ -1,0 +1,10 @@
+k exec -it etcd-master01 sh
+export ETCDCTL_INSECURE_SKIP_TLS_VERIFY=true
+export ETCDCTL_API=3
+export ETCDCTL_CERT=/etc/kubernetes/pki/etcd/healthcheck-client.crt
+export ETCDCTL_KEY=/etc/kubernetes/pki/etcd/healthcheck-client.key
+etcdctl -w table member list
+etcdctl -w table endpoint status
+etcdctl get "" --prefix --keys-only | sed '/^\s*$/d'
+etcdctl -w fields get /registry/services/endpoints/kube-system/kube-controller-manager
+etcdctl -w fields get /registry/deployments/kube-system/kube-dns

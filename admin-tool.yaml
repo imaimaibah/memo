@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: admin-tool
+  labels:
+    apps: admin-tool
+spec:
+  containers:
+  - image: busybox
+    name: admin-tool
+    command:
+    - sleep
+    - 365d
+    securityContext:
+      privileged: true
+  hostPID: true
