@@ -13,3 +13,10 @@ NAMESPACE=default
 SERVICENAME=kubernetes
 curl http://localhost:8001/api/v1/namespaces/${NAMESPACE}/services/https:${SERVICENAME}:/proxy/
 ```
+
+```
+NAMESPACE=default
+POD=dashboard
+curl http://localhost:8001/api/v1/namespaces/${NAMESPACE}/pods/https:${POD}:443/proxy/
+```
+
