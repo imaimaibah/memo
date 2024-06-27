@@ -32,3 +32,31 @@ Revertの仕方
 ![image](./img/2or3dots.png)
 
 > git diff A...B = git diff $(git merge-base A B) B
+
+
+# プロキシ経由でgit clone
+
+.ssh/configを下記の様にセットアップします。
+
+```
+Host=foo.server.com
+ProxyCommand=socat - PROXY:your.proxy.ip:%h:%p,proxyport=3128,proxyauth=user:pwd
+```
+
+foo.server.comへssh出来るようになっているはずです。
+
+```
+> ssh -T git@foo.server.com
+```
+
+git cloneしてみます。
+
+```
+> git clone ssh://foo.server.com/var/git/myrepo.git
+```
+
+# 特定のファイルとstashする方法
+
+```
+> git stash push -m welcome_cart app/views/cart/welcome.thtml
+```
