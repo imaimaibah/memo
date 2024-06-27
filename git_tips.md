@@ -55,8 +55,18 @@ git cloneしてみます。
 > git clone ssh://foo.server.com/var/git/myrepo.git
 ```
 
-# 特定のファイルとstashする方法
+# 特定のファイルをstashする方法
 
 ```
-> git stash push -m welcome_cart app/views/cart/welcome.thtml
+> git stash push -m "stash test" -- ./git_tips.md
+```
+
+# 特定のstashリストのファイルの差分を確認する
+```
+> git diff stash@{[番号]}　-- [ファイル名]
+```
+
+# stashしたファイル群から特定ファイルを取り出す
+```
+> git checkout stash@{[番号]} -- [ファイル名]
 ```
