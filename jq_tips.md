@@ -11,7 +11,7 @@ echo '{"date": "'$(date +"%Y-%m-%dT%H:%M:%S+0100")'"}' | jq -r '.date|sub(".*T(?
 FYI:
 [pcre2pattern](https://www.pcre.org/current/doc/html/pcre2pattern.html#SEC16)
 
-# Return index in search
+# Indexを返す方法
 
 You can use `map()` and `index()` to get an index. 
 
@@ -42,4 +42,17 @@ JSON='{
 }'
 
 echo $JSON | jq -r '.items|map(.name.first=="Taro")|index(true)'
+```
+
+# JSON編集
+
+`|=`でストリーム上で代入する
+
+```
+$ echo '{"name": {"first": "hoge"}}' | jq '.name.first|="poyo"'
+{
+  "name": {
+"first": "poyo",
+  }
+}
 ```
