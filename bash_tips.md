@@ -5,9 +5,9 @@
 while IFS='|' read -r i j rest <&3; do
   {
     printf '%s\n' "something with $i and $j"
-    # Close file descriptor 3 for the chile process
+    # Close file descriptor 3 for the child process
   } 3<&-
-done 3< <(kubectl get --no-headers po -A |awk '{print $1"||$2"}')
+done 3< <(kubectl get --no-headers po -A |awk '{print $1"|"$2}')
 ```
 
 # Open a TCP connection without telnet
