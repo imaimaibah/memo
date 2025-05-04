@@ -31,3 +31,20 @@ EXPIRY_DATE=$(echo | openssl s_client -servername $DOMAIN -connect $DOMAIN:443 2
 DAYS_LEFT=$(( ($(date -d "$EXPIRY_DATE" +%s) - $(date +%s)) / 86400 ))
 echo "SSL certificate for $DOMAIN expires in $DAYS_LEFT days."
 ```
+
+# Append to a file
+
+```bash
+zshrc_file=~/.zshrc
+### Open file descriptor 3 and redirect a file into it.
+exec 3<$zshrc_file
+### Delete the actual file. The descriptor still opened. 
+rm -f $zshrc_file
+### Create and edit the file.
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' > $zshrc_file &&
+###  In case the command fails, 
+  cat <&3 >>$zshrc_file ||
+  cat <&3 >$zshrc_file
+### Close the descriptor
+exec 3>&-
+```
