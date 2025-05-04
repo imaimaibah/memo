@@ -23,6 +23,7 @@ cat <&3
 # close
 exec 3>&-
 ```
+
 # SSL Certificate Expiry Checker
 
 ```bash
@@ -46,5 +47,29 @@ echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' > $zshrc_file &&
   cat <&3 >>$zshrc_file ||
   cat <&3 >$zshrc_file
 ### Close the descriptor
+exec 3>&-
+```
+
+
+# Run process in background and wait until it completes
+sleep 10 & wait $!
+
+# 2 other ways to read files/command outputs
+
+```bash
+exec 3< <(cat ./bash_tips.md)
+while read -r -u3 line; do
+  echo $line
+  echo lll
+done
+exec 3>&-
+```
+
+```bash
+exec 3<file
+while read -r -u3 line;do
+  echo $line
+  echo aaa
+done
 exec 3>&-
 ```
